@@ -41,7 +41,7 @@ func main() {
 	}
 }
 
-func (*server) New(ctx context.Context, req *notification.NewDonutNotificationRequest) (*notification.NewDonutNotificationResponse, error) {
+func (*server) NewDonutNotification(ctx context.Context, req *notification.NewDonutNotificationRequest) (*notification.NewDonutNotificationResponse, error) {
 	fmt.Printf("Received Sum RPC: %v", req)
 
 	res := &notification.NewDonutNotificationResponse{}
