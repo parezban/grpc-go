@@ -8,8 +8,7 @@ package notification;
 service DonutsNotifier {
     // Sends a new donut notification
     rpc NewDonutArriveNotification (NewDonutNotificationRequest) returns (NewDonutNotificationResponse) {}
-    rpc ListDonutsNotifications (stream ListDonutsNotificationsRequest) returns (stream ListDonutsNotificationsResponse) {}
-    rpc UpdateDonutNotification (UpdateDonutNotificationRequest) returns (UpdateDonutNotificationResponse) {}
+    rpc ListDonutsNotifications (stream ListDonutsNotificationsRequest) returns (stream NewDonutNotificationResponse) {}
 }
 
 message NewDonutNotificationRequest {
@@ -32,4 +31,8 @@ message NewDonutNotificationResponse {
         DELETE = 2;
     };
     Action action = 3;
+}
+
+message ListDonutsNotificationsRequest {
+
 }
