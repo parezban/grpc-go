@@ -60,6 +60,10 @@ func (*server) GetNotification(req *notification.ListDonutsNotificationsRequest,
 				})
 				if err != nil {
 					log.Fatalf("Failed to send response: %v\n", err)
+				} else {
+					lastDataPushed = append(lastDataPushed, Notification{
+						Message: newData.Message,
+					})
 				}
 			}
 		}
