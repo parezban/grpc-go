@@ -12,25 +12,11 @@ service DonutsNotifier {
 }
 
 message NewDonutNotificationRequest {
-    int32 id = 1;
-    string name = 2;
-    enum Action {
-        NEW = 0;
-        UPDATE = 1;
-        DELETE = 2;
-    };
-    Action action = 3;
+    string message = 1;
 }
 
 message NewDonutNotificationResponse {
-    int32 id = 1;
-    string message = 2;
-    enum Action {
-        NEW = 0;
-        UPDATE = 1;
-        DELETE = 2;
-    };
-    Action action = 3;
+    string message = 1;
 }
 
 message ListDonutsNotificationsRequest {

@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net"
+	"time"
 
 	"github.com/parezban/grpc-go/api/notification"
 	"google.golang.org/grpc"
@@ -13,9 +14,7 @@ import (
 var data []Notification
 
 type Notification struct {
-	Id      int32
 	Message string
-	Action  notification.NewDonutNotificationResponse_Action
 }
 
 type server struct {
@@ -47,4 +46,23 @@ func (*server) NewDonutNotification(ctx context.Context, req *notification.NewDo
 	res := &notification.NewDonutNotificationResponse{}
 
 	return res, nil
+}
+
+func (*server) GetNotification(req *notification.ListDonutsNotificationsRequest, stream notification.DonutsNotifier_ListDonutsNotificationsServer) error {
+
+	var lastDataPushed []Notification
+
+	for {
+		if len(lastDataPushed) != len(data) {
+			for _, newData := range data[len(lastDataPushed):] {
+				err := stream.Send(&notification.NewDonutNotificationResponse{
+					Message: newData.Message,
+				})
+				if err != nil {
+					log.Fatalf("Failed to send response: %v\n", err)
+				}
+			}
+		}
+		time.Sleep(time.Second / 2)
+	}
 }
