@@ -40,7 +40,7 @@ func main() {
 	}
 }
 
-func (*server) NewDonutNotification(ctx context.Context, req *notification.NewDonutNotificationRequest) (*notification.NewDonutNotificationResponse, error) {
+func (*server) NewDonutArriveNotification(ctx context.Context, req *notification.NewDonutNotificationRequest) (*notification.NewDonutNotificationResponse, error) {
 	fmt.Printf("Received Sum RPC: %v", req)
 
 	newDonatMessage := Notification{
@@ -56,8 +56,7 @@ func (*server) NewDonutNotification(ctx context.Context, req *notification.NewDo
 	return res, nil
 }
 
-func (*server) GetNotification(req *notification.ListDonutsNotificationsRequest, stream notification.DonutsNotifier_ListDonutsNotificationsServer) error {
-
+func (*server) ListDonutsNotifications(stream notification.DonutsNotifier_ListDonutsNotificationsServer) error {
 	var lastDataPushed []Notification
 
 	for {
