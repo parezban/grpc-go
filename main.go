@@ -43,7 +43,15 @@ func main() {
 func (*server) NewDonutNotification(ctx context.Context, req *notification.NewDonutNotificationRequest) (*notification.NewDonutNotificationResponse, error) {
 	fmt.Printf("Received Sum RPC: %v", req)
 
-	res := &notification.NewDonutNotificationResponse{}
+	newDonatMessage := Notification{
+		Message: req.Message,
+	}
+
+	data = append(data, newDonatMessage)
+
+	res := &notification.NewDonutNotificationResponse{
+		Message: req.Message,
+	}
 
 	return res, nil
 }
@@ -60,10 +68,6 @@ func (*server) GetNotification(req *notification.ListDonutsNotificationsRequest,
 				})
 				if err != nil {
 					log.Fatalf("Failed to send response: %v\n", err)
-				} else {
-					lastDataPushed = append(lastDataPushed, Notification{
-						Message: newData.Message,
-					})
 				}
 			}
 		}
