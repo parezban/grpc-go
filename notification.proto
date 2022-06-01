@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+option go_package = "./notification";
+
+package notification;
+
+// The Donuts notification service definition.
+service DonutsNotifier {
+    // Sends a new donut notification
+    rpc NewDonutArriveNotification (NewDonutNotificationRequest) returns (NewDonutNotificationResponse) {}
+    rpc ListDonutsNotifications (stream ListDonutsNotificationsRequest) returns (stream ListDonutsNotificationsResponse) {}
+    rpc UpdateDonutNotification (UpdateDonutNotificationRequest) returns (UpdateDonutNotificationResponse) {}
+}
+
+message NewDonutNotificationRequest {
+    int32 id = 1;
+    string name = 2;
+    enum Action {
+        NEW = 0;
+        UPDATE = 1;
+        DELETE = 2;
+    };
+    Action action = 3;
+}
+
+message NewDonutNotificationResponse {
+    int32 id = 1;
+    string message = 2;
+    enum Action {
+        NEW = 0;
+        UPDATE = 1;
+        DELETE = 2;
+    };
+    Action action = 3;
+}
