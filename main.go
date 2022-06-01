@@ -25,7 +25,7 @@ func main() {
 	fmt.Println("Server is running...")
 
 	// Make a listener
-	lis, err := net.Listen("tcp", "0.0.0.0:50051")
+	lis, err := net.Listen("tcp", "0.0.0.0:3000")
 	if err != nil {
 		log.Fatalf("Failed to listen: %v", err)
 	}
